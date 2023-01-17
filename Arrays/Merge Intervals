@@ -1,0 +1,36 @@
+Given a collection of Intervals, the task is to merge all of the overlapping Intervals.
+
+Approach:
+
+ temp
+[[1,3]    [2,6]    [8,10]   [15,18]]
+  it
+if sorted already,continue the procedure.if not sort the array first.
+now we traverse the array and check it[0] is less than or equal to temp[1].if true,update the temp[1] as maximum of it[1] and temp[1].
+if greater, push the interval into the vector.
+
+Linearly iterate over the array if the data structure is empty insert the interval in the data structure.
+If the last element in the data structure overlaps with the current interval we merge the intervals by updating the last element in the data structure
+and if the current interval does not overlap with the last element in the data structure simply insert it into the data structure.
+Since we have sorted the intervals, the intervals which will be merging are bound to be adjacent. 
+We kept on merging simultaneously as we were traversing through the array and when the element was non-overlapping we simply inserted the element in our data structure.
+
+code:
+
+vector<vector<int>> merge(vector<vector<int>>& intervals) {
+        vector<vector<int>>merge;
+        if(intervals.size()==0)return intervals;
+        sort(intervals.begin(),intervals.end());
+        vector<int>temp=intervals[0];
+        for(auto it:intervals){
+            if(it[0]<=temp[1]){
+                temp[1]=max(it[1],temp[1]);
+            }
+            else{
+                merge.push_back(temp);
+                temp=it;
+            }
+        }
+        merge.push_back(temp);
+        return merge;
+    }
