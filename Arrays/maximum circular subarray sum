@@ -1,0 +1,43 @@
+Given a circular integer array nums of length n, return the maximum possible sum of a non-empty subarray of nums.
+A circular array means the end of the array connects to the beginning of the array. Formally, the next element of nums[i] is nums[(i + 1) % n] and 
+the previous element of nums[i] is nums[(i - 1 + n) % n].
+A subarray may only include each element of the fixed buffer nums at most once. Formally, for a subarray nums[i], nums[i + 1], ..., nums[j], 
+there does not exist i <= k1, k2 <= j with k1 % n == k2 % n.
+
+
+Approach:
+
+1. find minimum subarray sum and array sum.
+2. subtract array sum and minimum subarray sum.
+
+boundary case is that if array contains all negative elements,just return maximum element.
+
+Code:
+
+class Solution {
+public:
+    int maxSubarraySumCircular(vector<int>& nums) {
+        int overAllMax;
+       int overAllMin;
+       int totalSum=0;
+       int sumMin;
+       int sumMax;
+       overAllMax=overAllMin=sumMin=sumMax=totalSum=nums[0];
+       for(int i=1;i<nums.size();i++)
+       {
+           totalSum=totalSum+nums[i];
+           sumMax=max(nums[i],sumMax+nums[i]);
+           if(sumMax>overAllMax)
+           overAllMax=sumMax;
+
+           sumMin=min(nums[i],sumMin+nums[i]);
+            if(sumMin<overAllMin)
+           overAllMin=sumMin;
+       }
+       if(totalSum!=overAllMin)
+       return max(overAllMax,totalSum-overAllMin);
+       else
+       return overAllMax;
+    }
+};
+
