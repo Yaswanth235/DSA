@@ -1,0 +1,47 @@
+vector<int> printUnsorted(int arr[], int n) {
+    // /1 from left to right check where the conditions voilates of sorting sttore that index
+    //2 from right to left do the same
+    // 3 in that middle range find min and max ele
+    // 4 check any range prev to middle one ,any ele found > min then store that in s
+    //5 check from left half range to the mid ,found if any ele <max found  if yes store that
+    // 6 return s and e
+    
+    
+    //1
+    int p1,p2;
+    for(int i=0;i<n;i++){
+        if(arr[i]>arr[i+1]){
+            p1=i;
+            break;
+        }
+        if(i==n-1) return {0,0};
+    }//2
+    for(int i=n-1;i>=0;i--){
+        if(arr[i]<arr[i-1]){
+            p2=i;
+            break;
+        }
+    }
+    //3
+    int mn=INT_MAX,mx=INT_MIN;
+    for(int i=p1;i<=p2;i++){
+        if(arr[i]<mn) mn=arr[i];
+        if(arr[i]>mx) mx=arr[i];
+    }
+    // 4.
+    int a1=p1,a2=p2;
+    for(int i=0;i<p1;i++){
+        if(arr[i]>mn){
+            a1=i;
+            break;
+        }
+    }//5
+    for(int i=n-1;i>=p2;i--){
+        if(arr[i]<mx){
+            a2=i;break;
+        }
+    }
+    //6
+    return {a1,a2};
+    
+    }
