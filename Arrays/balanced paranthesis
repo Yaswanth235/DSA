@@ -1,0 +1,31 @@
+Check Balanced Parentheses. Given string str containing just the characters ‘(‘, ‘)’, ‘{‘, ‘}’, ‘[‘ and ‘]’, check if the input string is valid and return true if the string is balanced otherwise return false.
+
+Approach:
+
+1.Whenever we get the opening bracket we will push it into the stack. I.e ‘{‘, ’[’, ’(‘.
+2.Whenever we get the closing bracket we will check if the stack is non-empty or not.
+3.If the stack is empty we will return false, else if it is nonempty then we will check if the topmost element of the stack is the opposite pair of the closing bracket or not.
+4.If it is not the opposite pair of the closing bracket then return false, else move ahead.
+5.After we move out of the string the stack has to be empty if it is non-empty then return it as invalid else it is a valid string.
+
+code:
+
+bool ispar(string x)
+    {
+        stack<char>s;
+        for(auto it:x){
+            if(it=='['||it=='{'||it=='('){
+                s.push(it);
+            }
+            else{
+                if(s.empty()==true)return false;
+                char t=s.top();
+                s.pop();
+                if((it==']'&&t=='[')||(it=='}'&&t=='{')||(it==')'&&t=='(')){
+                    continue;
+                }
+                else return false;
+            }
+        }
+        return s.empty();
+    }
