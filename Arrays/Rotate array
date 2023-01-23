@@ -1,0 +1,14 @@
+1. take new vector and add elements from n-k to n into it.
+2. traverse the array and add the elements from 0 index to n-k index.
+3. return vector.
+
+CODE:
+class Solution {
+public:
+    void rotate(vector<int>& nums, int k) {
+        k=k%nums.size();
+        reverse(nums.begin(),nums.end());
+        reverse(nums.begin(),nums.begin()+k);
+        reverse(nums.begin()+k,nums.end());
+    }
+};
