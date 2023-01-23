@@ -1,0 +1,50 @@
+Given an integer array nums, return an array answer such that answer[i] is equal to the product of all the elements of nums except nums[i].
+The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit integer.
+You must write an algorithm that runs in O(n) time and without using the division operation.
+
+Approach:
+
+ dry run-
+ 
+  1  2  3  4
+  
+  output would be   24  12  8  6
+  
+1. calculate prefix product array from left side.
+2. calculate suffix product array from right side.
+3. for each index,multiply l[i] and r[i].
+
+code:
+        vector<long long int> left(n);
+        vector<long long int> right(n);
+        left[0] = 1;
+        right[n-1] = 1; 
+        for(int i=1;i<n;i++){
+           left[i] = left[i-1]*nums[i-1];
+        }
+        for(int i=n-2;i>=0;i--){
+            right[i] = right[i+1]*nums[i+1];
+        }
+        for(int i=0;i<n;i++){
+            nums[i] = left[i]*right[i];
+        }
+        return nums;
+
+Approach 2:
+
+1. instead of suffix array, perform l[i]*r,r=r*arr[i].
+
+code:
+        vector<long long int> left(n);
+        left[0] = 1;
+        for(int i=1;i<n;i++){
+           left[i] = left[i-1]*nums[i-1];
+        }
+        long long int r=1;
+        for(int i=n-1;i>=0;i--){
+           left[i]=left[i]*r;
+           r=r*nums[i];
+        }
+        return nums;
+
+  
