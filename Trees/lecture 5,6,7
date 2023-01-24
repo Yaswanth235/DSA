@@ -1,0 +1,55 @@
+preorder traversal(using recursion)
+
+
+1. print node.
+2. make call for left side.
+3. make call for right side.
+
+code:
+
+void preorder(root){
+
+ if(root==NULL)return;
+ 
+  cout<<root->val;
+  preorder(root->left);
+  preorder(root->right);
+  
+  }
+  
+  2.inorder Traversal(using recursion)
+  
+1.make call for left side.
+2.print node.
+3.make call for right side.
+
+code:
+
+void inorder(root){
+
+ if(root==NULL)return;
+ 
+  inorder(root->left);
+  cout<<root->val;
+  inorder(root->right);
+  
+  }
+  
+  3. postorder Traversal(using recursion)
+  
+  1.call left.
+  2.call right.
+  3.print node.
+  
+  code:
+  
+  void postorder(root){
+  if(root==NULL)return;
+  
+  postorder(root->left);
+  postorder(root->right);
+  cout<<root->val;
+  
+  }
+
+  
