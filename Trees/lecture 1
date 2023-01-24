@@ -1,0 +1,17 @@
+Representation of tree:
+
+1.Each node has left and right pointer and data.
+
+in c++:
+
+struct Node{
+   int data;
+   struct Node*right;
+   struct Node*left;
+     Node(int val){
+       data=val;
+       left=right=NULL;
+     }
+ };
+ 
+ 
