@@ -1,0 +1,9 @@
+Binary Tree Traversals
+
+1. inorder(left->root->right)
+2. preorder(root->left->right)
+3. postorder(left->right->root)
+
+inorder means traverse left first,then root,then right.
+preorder means traverse root first,then left,then right.
+postorder means traverse left first,then right,then root.
