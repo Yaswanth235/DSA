@@ -1,0 +1,25 @@
+Approach:
+
+1. BST has every left subtree less than root and every right subtree greater than root.
+2. approach is to provide a range and check whether node lies in that range or not.
+3. now start with range = [INT_MIN,INT_MAX] and check whether root lies in this range or not. if it lies,
+call the left and right subtrees. when left tree is called, range is updated to [INT_MIN,root] and when right subtree is called, range is updated to [root,INT_MAX].
+
+Code:
+
+class Solution {
+public:
+    bool vbst(TreeNode* root,long minVal,long maxVal) {
+        if(root==NULL)return true;
+        if(root->val>=maxVal||root->val<=minVal){
+            return false;
+        }
+        return vbst(root->left,minVal,root->val)&& vbst(root->right,root->val,maxVal);
+ }
+      bool isValidBST(TreeNode*root){
+          if(!root)return true;
+        if(!root->left && !root->right)return true;
+        return vbst(root,LONG_MIN,LONG_MAX);
+    }
+    
+};
