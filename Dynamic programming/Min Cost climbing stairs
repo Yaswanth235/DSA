@@ -1,0 +1,50 @@
+You are given an integer array cost where cost[i] is the cost of ith step on a staircase. Once you pay the cost, you can either climb one or two steps.
+You can either start from the step with index 0, or the step with index 1.
+Return the minimum cost to reach the top of the floor.
+
+Approach:
+
+conditions:
+
+jumps can be 1step or 2step.
+starting can be done from 0th or 1st index.
+
+ex:
+
+ 10   15   20
+ 
+ starting is done from 1st index, 15   20 is achieved. now we can either jump one step to reach 20 and another step to reach from 20 to end or two steps to reach end.
+ so distance in (1) is 35 and in second case, distance is 15. so minimum distance is 15.
+ 
+ base case is that if there are two elements present,return the minimum element among two elements and if one element is present,return that element.
+ 
+ APPROACH IS THAT WE MAKE TWO CALLS,I.E; FOR ONE JUMP AND TWO JUMPS AND RETURN MINIMUM VALUE AMONG TWO CALLS.
+ 
+ Code:
+ 
+ class Solution {
+public:
+    int mincost(vector<int>&cost,int i,vector<int>&m){
+        if(i==cost.size()-1||i==cost.size()-2){
+            return cost[i];
+        }
+        //if cost is previously calculated,return that cost
+        if(m[i]!=0){
+            return m[i];
+        }
+        int x=mincost(cost,i+1,m);
+        int y=mincost(cost,i+2,m);
+        m[i]=min(x,y)+cost[i];
+        return m[i];
+    }
+    int minCostClimbingStairs(vector<int>& cost) {
+        if(cost.size()==2){
+            return min(cost[0],cost[1]);
+        }
+        vector<int>m(1001);
+        int x=mincost(cost,0,m);
+        int y=mincost(cost,1,m);
+        return min(x,y);
+    }
+};
+ 
