@@ -1,0 +1,31 @@
+Given a list of non-negative integers nums, arrange them such that they form the largest number and return it.
+Since the result may be very large, so you need to return a string instead of an integer.
+
+Approach:
+
+consider the testcase 10 2
+numbers that can be formed using above two numbers are 102 and 210. we return 210 as it is the largest number.
+one way is to sort the input array by first converting every element of input array into string.
+so 10 2 becomes "10" "2"
+now sorting them gives "10" "2"(in lexicographical order)
+so sorting should be done by comparing the appended result
+ex: "102" is smaller than "210" so we return "210".
+
+Code:
+//this function enables to sort the array by comparing the appended result.
+static bool comp(string a,string b){
+         return a+b>b+a;
+ }
+    string largestNumber(vector<int>& nums) {
+        int c=0;
+        for(auto x:nums)if(x==0)c++;
+        if(c==nums.size())return "0";
+        vector<string>v;
+        for(auto x:nums){
+            v.push_back(to_string(x));
+        }
+         sort(v.begin(),v.end(),comp);
+         string ans="";
+         for(auto x:v)ans+=x;
+         return ans;
+    }
