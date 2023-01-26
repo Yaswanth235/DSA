@@ -1,0 +1,15 @@
+approach: 
+
+1. priority queue approach.
+2. using sorting.
+
+approach 1:
+(kth minimum)
+1.insert elements into priority queue(by default they are in descending order)
+2.until k=0, pop out elements from priority queue.
+3. return top element.
+
+(kth maximum)
+1. insert elements into priority queue(change declaration:priority_queue<int,vector<int>,greater<int>>p)
+2.until k=0, pop out elements from priority queue.
+3. return top element.
