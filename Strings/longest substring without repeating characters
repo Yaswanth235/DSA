@@ -1,0 +1,29 @@
+Approach:
+ 
+ using sliding window technique
+ condition:
+ no repeating characters.
+ 1. whatever letter is at index j, increment the count in hashmap.
+ 2. check whether count(j)>1,
+      if true, remove that character
+      
+ 3.  update answer as max(ans,j-i+1);
+ 4.  increment j.
+ 
+ code:
+ 
+ int lengthOfLongestSubstring(string s) {
+         int i=0,j=0;
+         int ans=0;
+         unordered_map<char,int>m;
+         while(j<s.length()){
+             m[s[j]]++;
+            while(m[s[j]]>1){
+                m[s[i]]--;
+                i++;
+            }
+            ans=max(ans,j-i+1);
+            j++;
+        }
+        return ans;
+    }
