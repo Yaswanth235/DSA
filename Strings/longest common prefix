@@ -1,0 +1,31 @@
+Approach:
+
+1. take first string
+2. for every character of first string with remaining strings.
+3. if equal,add it to answer.
+4. else break the loop and return the answer.
+
+TC:O(m*n).
+
+Approach 2:
+
+1. sort the array.
+2. check if first and last elements have same characters.
+3. if have,add it to result string
+
+code:
+
+string longestCommonPrefix(vector<string>& strs) {
+        string res="";
+        sort(strs.begin(),strs.end());
+        int n=strs.size();
+        string s1=strs[0];
+        string s2=strs[n-1];
+        int m=s1.length();
+        int d=s2.length();
+        for(int i=0;i<min(m,d);i++){
+            if(s1[i]!=s2[i])break;
+            else res+=s1[i];
+        }
+        return res;
+    }
