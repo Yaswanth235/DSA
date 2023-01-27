@@ -1,0 +1,24 @@
+1. take two pointers i and j
+2.make them point on same index,i.e,starting index.
+3.traverse the string until i stands on last index.
+4.now traverse the string again with j until s[j] is not space.
+5.if space is encountered,reverse the part of string from i to j.
+6. assign i as j+1 and j as i.
+7. return the string.
+CODE:
+class Solution {
+public:
+    string reverseWords(string s) {
+        int n=s.length();
+        int i=0,j=0;
+        while(i<n){
+            while(j<n&&s[j]!=' '){
+                j++;
+            }
+            reverse(s.begin()+i,s.begin()+j);
+            i=j+1;
+            j=i;
+        }
+        return s;
+    }
+};
