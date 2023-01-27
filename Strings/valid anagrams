@@ -1,0 +1,17 @@
+Approach:
+
+anagrams are two strings which have same letters.
+ex: anagram,nagaram.
+
+approach:
+sort two strings and check they are equal or not.if equal,return true.
+insert both strings into two hashmaps,if both maps are equal return true.
+
+Code:
+
+bool isAnagram(string s, string t) {
+        sort(s.begin(),s.end());
+        sort(t.begin(),t.end());
+        if(s==t)return true;
+        else return false;
+    }
