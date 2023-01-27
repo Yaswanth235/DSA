@@ -1,0 +1,24 @@
+A decimal number is called deci-binary if each of its digits is either 0 or 1 without any leading zeros. 
+For example, 101 and 1100 are deci-binary, while 112 and 3001 are not.
+Given a string n that represents a positive decimal integer, return the minimum number of positive deci-binary numbers needed so that they sum up to n.
+
+Approach:
+
+Think about if the input was only one digit. Then you need to add up as many ones as the value of this digit.
+If the input has multiple digits, then you can solve for each digit independently, and merge the answers to form numbers that add up to that input.
+Thus the answer is equal to the max digit.
+
+Code:
+
+class Solution {
+public:
+    int minPartitions(string n) {
+        int s=n.length();
+        vector<int>v;
+        for(auto it:n){
+            v.push_back(it-'0');
+        }
+        sort(v.begin(),v.end());
+        return v[s-1];
+    }
+};
