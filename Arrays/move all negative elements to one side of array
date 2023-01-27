@@ -1,0 +1,31 @@
+problem: move all negative numbers to one side of array.
+
+approach: using space.
+
+1. 1st add all positive elements to the array.
+2. then add negative elements to the array.
+3. copy the array to the original array.
+
+code:
+
+void segregateElements(int arr[],int n)
+    {
+        int a[n];
+        int i,k;
+        int j=0;
+        //copying positive elements.
+        for(i=0;i<n;i++){
+            if(arr[i]>0){
+                a[j++]=arr[i];
+            }
+        }
+        //copying negative elements.
+        for(k=0;k<n;k++){
+            if(arr[k]<0){
+                a[j++]=arr[k];
+            }
+        }
+        for(int h=0;h<n;h++){
+            arr[h]=a[h];
+        }
+    }
