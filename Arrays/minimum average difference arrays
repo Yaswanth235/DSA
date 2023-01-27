@@ -1,0 +1,23 @@
+The average difference of the index i is the absolute difference between the average of the first i + 1 elements of nums and the average of the last n - i - 1 elements. Both averages should be rounded down to the nearest integer.
+Return the index with the minimum average difference. If there are multiple such indices, return the smallest index.
+
+solution:
+1.calculate sum of elements of array
+2.now traverse the array and for each index,calculate the average upto the index and find the difference for the averages
+3.wherever minimum average occurs,return the index.
+
+CODE:
+class Solution {
+public:
+	int minimumAverageDifference(vector<int>& nums) {
+		long long  n = nums.size(),sum = 0,total = accumulate(begin(nums),end(nums),0l);
+		long long maxi = LLONG_MAX,res = 0;
+		for(long long i = 0;i<n-1;i++){
+			sum+=nums[i];
+			long long curr = abs(sum/(i+1) - (total-sum)/(n-i-1));
+			if(curr<maxi) maxi = curr,res = i;
+		}
+
+		return maxi>total/n ? n-1:res;
+	}
+};
