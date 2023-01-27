@@ -1,9 +1,0 @@
-take a character and define it as '/0'(null).
-xor every character of two strings with the character.
-return the character.
-
-code:
- char r='/0'
- for(auto x:s)r^=x;
- for(auto x:t)r^=x;
- return r;
