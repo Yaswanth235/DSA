@@ -1,0 +1,16 @@
+bool detectCapitalUse(string word) {
+        
+       int smallCount = 0;
+        int capCount = 0;
+        for(auto &it:word){
+            if('a'<=it && it<='z')
+                smallCount++;
+            else
+                capCount++;
+        }
+        if(capCount==word.size() || smallCount==word.size())
+            return true;
+        if(capCount==1)
+            return ('A'<= word[0] && word[0]<='Z');
+        return false;
+    }
