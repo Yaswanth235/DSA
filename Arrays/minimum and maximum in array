@@ -1,0 +1,13 @@
+1.take INT_MIN and INT_MAX.
+2.update variables as traversing the array
+3.return the variables.
+
+code:
+
+a=INT_MIN;
+b=Int_MAX;
+for(auto it:arr){
+if(a>it)a=it;
+if(b<it)b=it;
+
+return a,b;
