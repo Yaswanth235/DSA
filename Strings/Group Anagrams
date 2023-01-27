@@ -1,0 +1,22 @@
+create a map with key as string and value as vector of string
+for all string create a string sorted form and for the sorted key push thier original form
+in that way all string which are anagram(same after sorting)--come into same key (of it's sorted form )
+now for all element of map pushback each anagram vector into return vector
+
+Code:
+
+vector<vector<string>> groupAnagrams(vector<string>& strs) {
+        vector<vector<string>>s;
+        unordered_map<string,vector<string>>m;
+        if(strs.size()==0)return s;
+        for(auto x:strs){
+            string t=x;
+            sort(x.begin(),x.end());
+            m[x].push_back(t);
+        }
+        for(auto x:m){
+            vector<string>d=x.second;
+            s.push_back(d);
+        }
+        return s;
+    }
