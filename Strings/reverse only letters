@@ -1,0 +1,28 @@
+1. take two pointers i and j
+2. start traversal from i=0 and j=n-1.
+3. if char[i] is not alphabet,increment i.
+4. if char[j] is not alphabet,decrement j.
+5. else swap elements at i,j.
+
+code:
+class Solution {
+public:
+    string reverseOnlyLetters(string s) {
+        int n=s.size();
+        int j=n-1;
+        int i=0;
+        while(i<j){
+            if(!isalpha(s[j])){
+                j--;
+            }
+            if(isalpha(s[j])&&isalpha(s[i])){
+                swap(s[i++],s[j--]);
+            }
+             if(!isalpha(s[i])){
+                i++;
+            }
+
+        }
+        return s;
+    }
+};
