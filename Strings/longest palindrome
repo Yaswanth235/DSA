@@ -1,0 +1,44 @@
+Given a string s which consists of lowercase or uppercase letters, return the length of the longest palindrome that can be built with those letters.
+Letters are case sensitive, for example, "Aa" is not considered a palindrome here.
+
+Approach:
+
+1. In general, palindrome's length is even or odd
+
+ex: abdba    //length=5
+    abccba   //length=6
+    
+    observation is that for odd length palindromes, one character occurs odd no of times and remaining even no of times whereas for even length ones,
+    every character occurs even no of times.
+    
+    1. use a map to store frequencies of every element of string.
+    in example,
+    
+    "abccccdd"    map --> a-1,b-1,c-4,d-2
+     since c and d have even occurences, we add the sum of occurances of c and d to result and for a and b, we add occurences-1 to the result.
+     but we can consider one odd occured character and form the palindrome(by placing that in centre).
+     
+    2. we maintain a boolean variable and when odd occured character is found,we make it true and atlast we add 1 to result.
+    
+    TC:o(n)
+    SC:o(n)
+    
+    Code:
+    int longestPalindrome(string s) {
+        unordered_map<char,int>m;
+        for(auto it:s){
+            m[it]++;
+        }
+        int res=0;
+        bool odd=false;
+        for(auto&it:m){
+            if(it.second%2==0)res+=it.second;
+            else{
+                odd=true;
+                res+=it.second-1;
+            }
+        }
+        if(odd==true)res++;
+        return res;
+    }
+    
