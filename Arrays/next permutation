@@ -1,0 +1,42 @@
+Approach:
+
+     idx1     idx2
+1  2  3  6  5  4
+
+next permutation for above series is 1 2 4 3 5 6.
+
+traverse the array from last and find the index where a[i]<a[i+1].store the index i in a variable.
+if array is sorted in descending order, variable doesnt have any value. in that case reverse the array.(for 5 4 3 2 1 next permutation is 1 2 3 4 5)
+
+now, again traverse from back and check a[i]>a[idx1] and store i in another variable.
+
+swap the elements at idx1,idx2. 1 2 4 6 5 3
+now reverse the array from idx1+1 to end. 1 2 4 3 5 6.
+
+
+code:
+
+vector<int> nextPermutation(int N, vector<int> arr){
+        if(arr.size()==1)return arr;
+        int idx1,idx2;
+        for(int i=N-2;i>=0;i--){
+            if(arr[i]<arr[i+1]){
+                idx1=i;
+                break;
+            }
+        }
+        if(idx1<0){
+            reverse(arr.begin(),arr.end());
+        }
+        else{
+            for(int i=N-1;i>=0;i--){
+                if(arr[i]>arr[idx1]){
+                    idx2=i;
+                    break;
+                }
+            }
+            swap(arr[idx1],arr[idx2]);
+            reverse(arr.begin()+idx1+1,arr.end());
+        }
+        return arr;
+    }
