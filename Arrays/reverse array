@@ -1,0 +1,15 @@
+Topic: Arrays
+
+1.Reverse the array
+
+Approach:
+1.using reverse STL function.
+2.using two pointer technique.
+   1. traverse until middle element
+   2. swap the elements of I and n-i-1.
+
+Code:
+1. i< n/2{
+   swap(a[i],a[n-i-1]);
+   return a;
+2.reverse(a.begin(),a.end());
