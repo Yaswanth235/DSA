@@ -1,0 +1,22 @@
+Declare a variable sum, to store the sum of prefix elements
+Traverse the array and at each index, add the element into the sum and check if this sum exists earlier. If the sum exists, then return true
+Also, insert every prefix sum into a map, so that later on it can be found whether the current sum is seen before or not
+At the end return false, as no such subarray is found
+
+code:
+
+ unordered_map<int,int>m;
+        int sum=0;
+        for(int i=0;i<n;i++){
+            sum+=arr[i];
+            if(sum==0){
+                return true;
+            }
+            if(m.find(sum)==m.end()){
+                     m[sum]=i;
+            }
+            else{
+                return true;
+             }
+        }
+        return false;
