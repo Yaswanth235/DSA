@@ -1,0 +1,40 @@
+union: find union of two arrays.
+
+approach:
+1. insert elements into set.
+2. return the size of set.
+
+TC: o(n)+o(m)
+SC: o(n+m)
+
+code:
+int doUnion(int a[], int n, int b[], int m)  {
+            set<int>v;
+            for(int i=0;i<n;i++){
+                v.insert(a[i]);
+            }
+            for(int i=0;i<m;i++){
+                v.insert(b[i]);
+            }
+            return v.size();
+    }
+    
+    intersection:find intersection of two arrays.
+    
+    approach:
+    1.insert one array into set.
+    2.return the elements which are present in set and remaining array.
+    
+    code:
+    int c=0;
+        set<int>s,t;
+        for(int i=0;i<n;i++){
+            s.insert(a[i]);
+        }
+        for(int i=0;i<m;i++){
+            t.insert(b[i]);
+        }
+        for(auto it:s){
+            if(t.find(it)!=t.end())c++;
+        }
+        return c;
