@@ -1,0 +1,29 @@
+You are given an array arr[] of N integers including 0. The task is to find the smallest positive number missing from the array.
+
+Approach:
+
+first sort the array.
+1. traverse the array and check if element is lessthan or equal to zero.
+   since the smallest positive number is needed,skip the negative elements.
+   so continue the step.
+2. maintain the variable which is intialized to 1 and if element is equal to variable,increment the variable
+3. return the variable.
+
+code:
+
+int missingNumber(int arr[], int n) 
+    { 
+        sort(arr, arr+n);
+        int lastMissing=1;
+        for(int i=0; i < n; i++)
+        {
+            if(arr[i] <= 0)
+            continue;
+            if(arr[i] == lastMissing)
+            {
+                lastMissing++;
+            }
+        }
+        return lastMissing;
+    } 
+    
