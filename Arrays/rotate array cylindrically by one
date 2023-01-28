@@ -1,0 +1,17 @@
+Given an array, rotate the array by one position in clock-wise direction.
+
+
+Approach:
+1. store last element in a variable.
+2. assign the left element to right element from end.
+3. assign 1st element to variable.
+
+code:
+void rotate(int arr[], int n)
+{
+    int k=arr[n-1];
+    for(int i=n-1;i>=0;i--){
+        arr[i]=arr[i-1];
+    }
+    arr[0]=k;
+}
