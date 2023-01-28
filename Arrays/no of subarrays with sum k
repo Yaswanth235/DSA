@@ -1,0 +1,23 @@
+Approach:
+
+1. take sum=0;
+2. declare a map and start traversing the vector.
+3. now if sum is equal to k,increment count.
+4. if sum - k is found in map, add m[sum-k] to the count.
+5. add sum to map.
+
+code:
+
+int subarraySum(vector<int>& nums, int k) {
+         int n=nums.size();
+         unordered_map<int,int>m;
+         int c=0;
+         int sum=0;
+         for(int i=0;i<n;i++){
+             sum+=nums[i];
+            if(sum==k)c++;
+            if(m.find(sum-k)!=m.end())c+=m[sum-k];
+            m[sum]++;
+        }
+        return c;
+    }
