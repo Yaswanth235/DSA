@@ -1,0 +1,49 @@
+Approach:
+
+1. using binary search
+     low      mid       high
+ex:   4  5  6  7  0  1  2
+
+calculate middle index=(low+high)/2
+now traverse the array and check left part of middle index is sorted or not
+  if(arr[low]<=arr[mid]  it is sorted).
+now check whether target is present in left side of middle or not
+  if(target<a[mid]&&target>=a[low])
+  then update high to mid-1.
+  else update low to mid+1.
+  
+  if left part is not sorted,right part is definitely sorted.
+      now check whether target is present in right side of middle or not
+  if(target<=a[high]&&target>a[mid])
+  then update low to mid+1.
+  else update high to mid-1.
+  
+  
+  Code:
+  
+  int search(vector<int>& nums, int target) {
+         int low=0;
+         int high=nums.size()-1;
+         while(low<=high){
+            int mid=(high+low)/2;
+            if(nums[mid]==target)return mid;
+            if(nums[low]<=nums[mid]){
+            if(target>=nums[low]&&target<nums[mid]){
+                high=mid-1;
+            }else{
+                low=mid+1;
+            }
+        }
+        else{
+            if(target>nums[mid]&&target<=nums[high]){
+                low=mid+1;
+            }
+            else{
+            high=mid-1;
+            }
+        }
+        }
+        return -1;
+    }
+  
+  
