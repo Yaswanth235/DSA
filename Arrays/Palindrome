@@ -1,0 +1,15 @@
+check string is palindrome or not.
+
+code:
+
+int isPalindrome(string S)
+	{
+	    string s="";
+	    int n=S.length();
+	    int i=0,j;
+	    for(j=n-1;j>=0;j--){
+	        s+=S[j];
+	    }
+	    if(s==S)return 1;
+	    else return 0;
+	}
