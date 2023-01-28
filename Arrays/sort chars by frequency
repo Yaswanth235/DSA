@@ -1,0 +1,24 @@
+solution:
+1.use unordered map
+2. store frequencies of elements in umap
+3. use lamda function in sort function.
+4. sytax(lambda function):
+ 
+ [&](auto a,auto b){return expression}
+ 
+ CODE:
+class Solution {
+public:
+    string frequencySort(string s) {
+        unordered_map<char,int>m;
+        for(auto it:s){
+            m[it]++;
+        }
+        sort(s.rbegin(),s.rend(),[&](char a,char b){return m[a]!=m[b] ? m[a]<m[b]:a>b;});
+        return s;
+        
+
+    }
+};
+ 
+ 
