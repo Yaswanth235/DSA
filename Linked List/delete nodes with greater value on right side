@@ -1,0 +1,67 @@
+Approach:
+
+ex:  12->15->10->11->5->6->2->3
+
+now, to make the process easier, reverse the linked list.
+
+now, after reversing, 3->2->6->5->11->10->15->12
+
+maintain two pointers previous as prev and to store head, cur is used here.store the head element in a variable m.
+move the head to next place.
+
+       cur  head
+so,     3    2    6    5    11    10    15    12
+       prev
+       
+traverse the list until head is null
+
+if head->data is greater than or equal to m, update prev as head and m as head->data and move head to next place.
+else update prev->next to head->next and point head to prev->next.
+
+in above, m=3 and head->data is 2. 
+                     prev   
+ so in this case,     3      2      6      5      11      10      15      12
+                     cur           head
+                     
+now, head->data>=m so update prev as head and move head.
+
+                                   prev   
+ so in this case,     3      2      6      5      11      10      15      12
+                     cur                  head
+
+
+Code:
+
+class Solution{
+    public:
+    Node*reverse(Node*head){
+        Node*p=NULL,*q=head,*r=NULL;
+        while(q!=NULL){
+            r=q->next;
+            q->next=p;
+            p=q;
+            q=r;
+        }
+        return p;
+    }
+    Node *compute(Node *head){
+        head=reverse(head);
+        Node*p=head,*q,*r;
+        q=head;
+        int m=head->data;
+        head=head->next;
+        while(head){
+            if(head->data>=m){
+                m=head->data;
+                p=head;
+                head=head->next;
+            }
+            else{
+                p->next=head->next;
+                head=p->next;
+            }
+        }
+        head=reverse(q);
+        return head;
+    }
+};
