@@ -6,6 +6,16 @@ Print the right column, i.e. Print the last column or n-1th column from row inde
 Print the bottom row, i.e. if k < m, then print the elements of the m-1th row from column n-1 to l and decrease the count of m
 Print the left column, i.e. if l < n, then print the elements of lth column from m-1th row to k and increase the count of l.
 
+ex:
+
+
+top----->1    2    3    4
+         5    6    7    8
+         9    10   11   12
+bottom-->13   14   15   16
+         ^               ^
+         |               |
+       left             right
 code:
 
 vector<int> spirallyTraverse(vector<vector<int> > matrix, int r, int c) {
@@ -16,17 +26,20 @@ int left = 0;
 int right = c-1; 
 vector<int> ans; 
 while(top<=bottom && left<=right){ 
+//printing 1st row
     for(int i=left; i<=right;i++) 
        ans.push_back(matrix[top][i]); 
        top++; 
+ //printing last column excluding the last element in 1st column
     for(int i=top;i<=bottom;i++) 
        ans.push_back(matrix[i][right]); 
        right--;
+ //printing the last row      
       if(top<=bottom){ 
     for(int i=right;i>=left;i--) 
        ans.push_back(matrix[bottom][i]); 
        bottom--; 
-    } 
+    }
     if(left<=right){ 
         for(int i=bottom;i>=top;i--) 
         ans.push_back(matrix[i][left]); 
