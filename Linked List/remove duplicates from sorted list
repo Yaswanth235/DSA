@@ -1,0 +1,23 @@
+using one pointer:
+1. take a pointer on head.
+2. traverse the list until pointers->next!=null
+3. check the adjacent elements:
+    if equal,break the link and attach the list to next link
+    else continue the traversal
+4. return the head.
+
+Code:
+ListNode* deleteDuplicates(ListNode* head) {
+        if(head==nullptr||head->next==NULL)return head;
+        ListNode*p=head;
+        while(p->next!=nullptr){
+             if(p->val!=p->next->val){
+                 p=p->next;
+             }
+            else{
+                p->next=p->next->next;
+               
+            }
+        }
+        return head;
+    }
