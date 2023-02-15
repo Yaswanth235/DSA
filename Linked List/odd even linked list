@@ -1,0 +1,37 @@
+approach:
+1. use two dummy nodes for two lists
+2. join the lists after seggregating the nodes
+
+seggregation of nodes:
+1.take a variable n intialized as 1 to store index of node
+2.segregate the nodes according to the nature of index,i.e,odd/even
+
+Code:
+class Solution {
+public:
+    ListNode* oddEvenList(ListNode* head) {
+        ListNode*p=head;
+        ListNode*q=new ListNode(-1);
+        ListNode*s=q;
+        ListNode*r=new ListNode(-1);
+        ListNode*t=r;
+        int n=1;
+        while(p!=NULL){
+            
+            if(n%2==1){
+                s->next=p;
+                s=s->next;
+            }
+            if(n%2==0){
+                t->next=p;
+                t=t->next;
+            }
+            p=p->next;
+            n++;
+        }
+        t->next=nullptr;
+        s->next=r->next;
+        return head;
+      
+    }
+};
