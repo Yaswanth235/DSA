@@ -1,0 +1,56 @@
+1. create a dummy node and point it to the head(q).
+2. point a pointer on the head of list(r).
+traverse the list until pointer on head is not null.
+now check that if( r->next!=NULL&&r->data==r->next->data)
+if its true,run another loop until r->next!=NULL &&r->data==r->next->data
+and move the r pointer.
+make q->next point on r->next;
+3.else move the q pointer.
+4.move the r pointer in both cases.
+5.return dummy node->next.
+
+Code:
+class Solution {
+public:
+    ListNode* deleteDuplicates(ListNode* head) {
+        //using space
+       /* map<int,int>m;
+        ListNode*r=new ListNode(-1);
+        ListNode*p=head;
+        while(p!=NULL){
+            m[p->val]++;
+        }
+        for(auto it:m){
+            if(it.second==1){
+                ListNode*q=new ListNode(it.first);
+                r->next=q;
+                q=q->next;
+            }
+        }
+        return r->next; 
+        }
+        };  */
+ //without space
+class Solution {
+public:
+    ListNode* deleteDuplicates(ListNode* head) {
+        ListNode*p=new ListNode(-1);
+        ListNode*q=p;
+        ListNode*r=head;
+        p->next=head;
+        while(r!=NULL){
+            if(r->next!=NULL&&r->val==r->next->val){
+                while(r->next!=NULL&&r->val==r->next->val){
+                    r=r->next;
+                }
+            q->next=r->next;
+            }
+            else{
+                q=q->next;
+            }
+            r=r->next;
+        }
+    return p->next;
+
+    }
+};
