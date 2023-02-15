@@ -1,0 +1,52 @@
+You are given a string s and an integer k, a "k"duplicate removal consists of choosing k adjacent and equal letters from s and removing them, 
+causing the left and the right side of the deleted substring to concatenate together.
+We repeatedly make k duplicate removals on s until we no longer can.
+Return the final string after all such duplicate removals have been made. It is guaranteed that the answer is unique.
+
+intuition:
+
+we have to delete the characters which are repeated k times consecutively.
+
+
+ex:
+
+abbcccd,k=2.
+
+ans: acd 
+
+since b is repeated k times,we delete b and c is repeated more than k times,so we delete c k times and add it to result.
+
+solution:
+
+using stack.
+if stack is empty,add char to stack.
+if stack is not empty,we check whether top element is equal or not.
+if equal,move k steps beside and check the elements. if same,pop all of them.
+
+code:
+
+class Solution {
+public:
+    string removeDuplicates(string s, int k) {
+        stack<pair<char, int>> st; 
+        int n = s.length();
+        for(int i=0; i<n; i++){
+            if(!st.empty() && s[i] == st.top().first){
+               st.top().second++;
+            }else{
+                st.push({s[i], 1});
+            }
+            if(st.top().second == k){ 
+                st.pop();
+            }
+        } 
+        string res ="";
+        while(!st.empty()){
+            res.append(st.top().second, st.top().first);
+            st.pop();
+        }
+        reverse(res.begin(), res.end());
+        return res;
+           
+    }
+};
