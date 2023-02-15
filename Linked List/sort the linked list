@@ -1,0 +1,55 @@
+	1. split the linked list into two halves at the middle of linked list.
+	   1. find middle of linked list by fast and slow pointer approach.
+	2. store the linked list from middle by allotting a pointer to the slow pointer.
+Now use the merge sort algorithm to merge the linked lists.
+
+Code:
+class Solution {
+public:
+    ListNode* sortList(ListNode* head) {
+       
+        if(head == NULL || head ->next == NULL)
+            return head;
+        ListNode *temp = NULL;
+        ListNode *slow = head;
+        ListNode *fast = head;
+        while(fast !=  NULL && fast -> next != NULL)
+        {
+            temp = slow;
+            slow = slow->next;          
+            fast = fast ->next ->next;  
+        }   
+        temp -> next = NULL;            
+        ListNode* l1 = sortList(head);    
+        ListNode* l2 = sortList(slow);    
+        return mergelist(l1, l2);         
+    }
+    ListNode* mergelist(ListNode *l1, ListNode *l2)
+    {
+        ListNode *ptr = new ListNode(0);
+        ListNode *curr = ptr;
+        
+        while(l1 != NULL && l2 != NULL){
+        if(l1->val <= l2->val){
+            curr -> next = l1;
+            l1 = l1 -> next;
+        }
+        else{
+            curr -> next = l2;
+            l2 = l2 -> next;
+        }
+        curr = curr ->next;
+        }
+        if(l1 != NULL)
+        {
+            curr -> next = l1;
+            l1 = l1->next;
+        }
+        if(l2 != NULL)
+        {
+            curr -> next = l2;
+            l2 = l2 ->next;
+        }
+        return ptr->next;
+    }
+};
