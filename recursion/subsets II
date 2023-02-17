@@ -1,0 +1,36 @@
+Given an integer array nums that may contain duplicates, return all possible 
+subsets
+ (the power set).
+
+The solution set must not contain duplicate subsets. Return the solution in any order.
+
+solution:
+
+same as subset problem,but use set to avoid duplicates and sort the inserting vector first before adding that vector to the set.
+
+code:
+
+class Solution {
+public:
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        int n=nums.size();
+        set<vector<int>>w;
+        vector<vector<int>>v;
+        for(int i=0;i<pow(2,n);i++){
+            vector<int>u;
+            for(int j=0;j<n;j++){
+                if(i&1<<j){
+                    u.push_back(nums[j]);
+                }
+                sort(u.begin(),u.end());
+            }
+            
+            w.insert(u);
+        }
+        for(auto it:w){
+             v.push_back(it);
+        }
+        sort(v.begin(),v.end());
+        return v;
+    }
+};
