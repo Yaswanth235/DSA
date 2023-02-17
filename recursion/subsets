@@ -1,0 +1,34 @@
+Given an integer array nums of unique elements, return all possible 
+subsets
+ (the power set).
+
+The solution set must not contain duplicate subsets. Return the solution in any order.
+
+
+approach:
+
+1.for each number from 0 to pow(2,n)(n is size of array),calculate binary numbers for all numbers.
+2.now for each binary number,traverse the number and check if jth bit is set or not.
+3. if set,add the character which is present at that index to result.
+
+code:
+
+class Solution {
+public:
+    vector<vector<int>> subsets(vector<int>& nums) {
+        int n=nums.size();
+        vector<vector<int>>v;
+        for(int i=0;i<pow(2,n);i++){
+            vector<int>u;
+            for(int j=0;j<n;j++){
+                if(i&1<<j){
+                    u.push_back(nums[j]);
+                }
+            }
+            
+            v.push_back(u);
+        }
+        sort(v.begin(),v.end());
+        return v;
+    }
+};
