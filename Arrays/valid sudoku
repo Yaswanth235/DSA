@@ -1,0 +1,64 @@
+Determine if a 9 x 9 Sudoku board is valid. Only the filled cells need to be validated according to the following rules:
+
+Each row must contain the digits 1-9 without repetition.
+Each column must contain the digits 1-9 without repetition.
+Each of the nine 3 x 3 sub-boxes of the grid must contain the digits 1-9 without repetition.
+
+Intuition:
+
+go through every row and every particular row should not have any duplicates.
+go through every column and every particular column should not have any duplicates.
+go through every grid(3*3) and every grid shouldnot have duplicates.
+
+to check this,we need 3 hashmaps for each condition.
+but how to check grids?each row has 3 grids and each column has 3 grids.now we mark 0 for all grids in 1st row and 1st column,1 for 2nd row and 2nd column,2 for 3rd row and 
+3rd cloumn.
+now we can access element in new indexing as (old indexing/3)
+       
+           0     1     2
+         0 1 2|3 4 5|6 7 8 
+     0
+0    1     
+     2
+     _
+     3
+1    4           *
+     5
+     _
+     6
+2    7
+     8
+     
+     
+ ex: if we wanna check [4][4](*),new indexing is [4/3][4/3]=[1][1].
+ 
+ 
+ Code:
+ 
+ class Solution {
+public:
+    bool isValidSudoku(vector<vector<char>>& board) {
+        bool arr1[9][9]={false};
+        bool arr2[9][9]={false};
+        bool res[9][9]={false};
+         for(int i=0;i<9;i++){
+             for(int j=0;j<9;j++){
+               if(board[i][j]=='.'){
+                   continue;
+               }
+              int idx=board[i][j]-'0'-1;
+              int area=(i/3)*3+(j/3);
+
+              if(arr1[i][idx]||arr2[j][idx]||res[area][idx]){
+                  return false;
+              }
+              arr1[i][idx]=true;
+              arr2[j][idx]=true;
+              res[area][idx]=true;
+            }
+        }
+        return true;
+    }
+};
+ 
+ 
