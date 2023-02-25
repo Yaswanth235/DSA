@@ -1,0 +1,42 @@
+You are given an array nums of n positive integers.
+You can perform two types of operations on any element of the array any number of times:
+
+If the element is even, divide it by 2.
+For example, if the array is [1,2,3,4], then you can do this operation on the last element, and the array will be [1,2,3,2].
+If the element is odd, multiply it by 2.
+For example, if the array is [1,2,3,4], then you can do this operation on the first element, and the array will be [2,2,3,4].
+The deviation of the array is the maximum difference between any two elements in the array.
+
+Return the minimum deviation the array can have after performing some number of operations.
+
+intuition:
+
+making all odd values even
+taking minimum of all values
+finding max and difference and update max/2 till max is even
+otherwise difference is the result.
+
+
+Code:
+
+class Solution {
+public:
+    int minimumDeviation(vector<int>& nums) {
+        priority_queue<int>p;
+        int m=INT_MAX;
+        for(auto it:nums){
+            if(it%2!=0)it*=2;
+            m=min(m,it);
+            p.push(it);
+        }
+        int diff=INT_MAX;
+        while(p.top()%2==0){
+            int e=p.top();
+            p.pop();
+            diff=min(diff,e-m);
+            m=min(e/2,m);
+            p.push(e/2);
+        }
+        return min(diff,p.top()-m);
+    }
+};
