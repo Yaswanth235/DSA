@@ -1,0 +1,41 @@
+Given the root of a binary tree, imagine yourself standing on the right side of it, return the values of the nodes you can see ordered from top to bottom.
+Example 1:
+       
+       1
+      / \
+     2   4
+    / \   \
+   3   3   5
+      /
+      6
+      
+  output: 1 4 5 6
+  
+ Approach:
+ 
+ 1. right view is nothing but last element in each level.
+ 
+ Code:
+ 
+class Solution {
+public:
+    vector<int> rightSideView(TreeNode* root) {
+        vector<int>v;
+        queue<TreeNode*>q;
+        if(root==NULL)return {};
+        q.push(root);
+        while(!q.empty()){
+            vector<int>d;
+            int n=q.size();
+            for(int i=0;i<n;i++){
+                TreeNode*h=q.front();
+                q.pop();
+                if(h->left!=NULL)q.push(h->left);
+                if(h->right!=NULL)q.push(h->right);
+                d.push_back(h->val);
+            }
+            v.push_back(d[n-1]);
+        }
+        return v;
+    }
+};
