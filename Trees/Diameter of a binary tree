@@ -1,0 +1,40 @@
+Problem statement:
+
+The diameter of a tree (sometimes called the width) is the number of nodes on the longest path between two end nodes.
+(not necessary that path is passing through root)
+
+Approach:
+
+ex-1:
+
+         1
+        / \
+       2   4
+      / \
+     3   5
+    / \   \
+   4   6   7
+  /         \
+ 9           8
+ 
+ in above example, path is not through the root.
+ Approach is that we check height for each node and return the maximum one.
+ 
+ Code:
+ 
+ class Solution {
+  public:
+    int height(Node* node){
+        if(node==NULL)return 0;
+        int lh=height(node->left);
+        int rh=height(node->right);
+        return 1+max(lh,rh);
+    }
+    int diameter(Node* root) {
+        if(root==NULL)return 0;
+        int d1=1+height(root->left)+height(root->right);
+        int d2=diameter(root->left);
+        int d3=diameter(root->right);
+        return max(max(d1,d2),d3);
+    }
+};
