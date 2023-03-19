@@ -1,0 +1,48 @@
+given a binary tree. return Vertical order traversal of the tree.
+
+Approach:
+
+using horizontal distance concept.(used in top and bottom view) and level order traversal also.
+now we use a map that stores horizontal distance with the vector of values that has hd as same value and 
+a queue which stores a pair of node and hd.
+now we add the root and 0 pair to the queue as root is situated at hd=0.
+now we traverse the queue and remove top element of the queue and check if hd is found in map.
+if found,we add the nodes value to the map(actually mapping the value to the hd).
+if not found, create a vector and add the node->value to it and map the hd to this new vector.
+now if root->left is not null, add {node->left,hd-1} to the queue. same for root->right.
+
+afterwards, traverse the map and add all vectors to a result vector.
+
+code:
+
+class Solution{
+    public:
+    vector<int> verticalOrder(Node *root){
+        queue<pair<Node*,int>>q;
+        map<int,vector<int>>m;
+        vector<int>ans;
+        q.push({root,0});
+        while(!q.empty()){
+            auto it=q.front();
+            q.pop();
+            int hd=it.second;
+            Node* p=it.first;
+            if(m.find(hd)!=m.end()){
+                m[hd].push_back(p->data);
+            }
+            else{
+                vector<int>d;
+                d.push_back(p->data);
+                m[hd]=d;
+            }
+            if(p->left!=NULL)q.push({p->left,hd-1});
+            if(p->right!=NULL)q.push({p->right,hd+1});
+        }
+        for(auto it:m){
+            for(auto i:it.second){
+                ans.push_back(i);
+            }
+        }
+        return ans;
+    }
+};
