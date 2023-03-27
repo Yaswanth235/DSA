@@ -1,0 +1,39 @@
+Given a binary tree, find the lowest common ancestor (LCA) of two given nodes in the tree.
+According to the definition of LCA on Wikipedia: “The lowest common ancestor is defined between two nodes p and q as the lowest node in T that has both p and q as descendants 
+(where we allow a node to be a descendant of itself).”
+
+Approach:
+
+         3
+        /  \
+       5    1
+      / \  / \ 
+     6   2 0  8
+        / \
+       7   4
+       
+       
+   now LCA for 5 and 1 node is 3.
+   there are 3 cases possible:
+   
+   case 1: when two nodes are at same side of root.
+   case 2: when two nodes are on different sides of root
+   case 3: when one of the node itself is LCA.
+   
+   Approach: we traverse the tree and finding the node.when we find the node,
+   we callback the recursion and next find another node. we return the node which has left and right callbacks
+   equal to that of nodes.
+   
+   Code:
+   
+   class Solution {
+public:
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        if(root==NULL||root==p||root==q)return root;
+        TreeNode*a=lowestCommonAncestor(root->left,p,q);
+        TreeNode*b=lowestCommonAncestor(root->right,p,q);
+        if(a==NULL)return b;
+        else if(b==NULL)return a;
+        else return root;
+    }
+};
