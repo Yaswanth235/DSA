@@ -1,0 +1,35 @@
+Given two integer arrays preorder and inorder where preorder is the preorder traversal of a binary tree and 
+inorder is the inorder traversal of the same tree, construct and return the binary tree.
+
+Approach:
+
+1. create a node from preorder array(since it starts with root node).
+2. now find the element in inorder array and store its index in a variable.
+3. since inorder stores the left subtree first, call the function for left subarray of inorder.
+4. then same for right side.
+
+Code:
+
+class Solution {
+public:
+    int h=0;
+    TreeNode* res(vector<int>& preorder, vector<int>& inorder,int a,int b){
+        if(a>b)return NULL;
+        TreeNode* root=new TreeNode(preorder[h]);
+        h++;
+        int g;
+        for(int i=a;i<=b;i++){
+            if(inorder[i]==root->val){
+                g=i;
+                break;
+            }
+        }
+        root->left=res(preorder,inorder,a,g-1);
+        root->right=res(preorder,inorder,g+1,b);
+        return root;
+    }
+    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+          TreeNode*result=res(preorder,inorder,0,inorder.size()-1);
+          return result;
+    }
+};
