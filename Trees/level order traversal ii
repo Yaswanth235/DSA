@@ -1,0 +1,30 @@
+Given an array arr[] which contains data of N nodes of Complete Binary tree in level order fashion. The task is to print the level order traversal in sorted order.
+
+Code:
+
+class Solution{
+    public:
+    vector<vector<int>>binTreeSortedLevels(int arr[], int n){
+         vector<vector<int>>a;
+         queue<int>q;
+         int j=0;
+         if(n>0)
+         q.push(arr[j]);
+         while(!q.empty()){
+             int d=q.size();
+             vector<int>v;
+             while(d){
+                 int t=q.front();
+                 q.pop();
+                 v.push_back(t);
+                 if(2*j+1<n)q.push(arr[2*j+1]);
+                 if(2*j+2<n)q.push(arr[2*j+2]);
+                 j++;
+                 d--;
+             }
+             sort(v.begin(),v.end());
+             a.push_back(v);
+         }
+         return a;
+    }
+};
