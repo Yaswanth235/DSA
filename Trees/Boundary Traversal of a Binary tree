@@ -1,0 +1,77 @@
+Boundary traversal of a binary tree is a traversal that visits all the nodes on the boundary of the tree. The boundary of a binary tree consists of the following three parts:
+
+Left boundary: The left boundary is the path from the root to the leftmost leaf node.
+Right boundary: The right boundary is the path from the root to the rightmost leaf node.
+Leaf nodes: The leaf nodes are the nodes that have no children.
+
+
+The boundary traversal can be performed in three steps:
+
+1.Traverse the left boundary. Start at the root and move left until you reach a leaf node.
+2.Traverse all the leaf nodes. Visit all the leaf nodes in left-to-right order.
+3.Traverse the right boundary in reverse order. Start at the rightmost leaf node and move right until you reach the root.
+The following is an example of a boundary traversal of a binary tree:
+
+Code snippet
+    1
+   / \
+  2   3
+ / \   \
+4   5   6
+
+The boundary traversal of this tree is as follows:
+
+1, 2, 4, 6, 5, 3
+
+
+Code:
+
+void rightBoundary(Node* root,vector<int>&res){
+       if (root == NULL){
+           return;
+       }
+       if(root->right){
+           rightBoundary(root->right,res);
+           res.push_back(root->data);
+       }
+       else if(root->left){
+           rightBoundary(root->left,res);
+           res.push_back(root->data);
+       }
+    }
+    void leftBoundary(Node* root,vector<int> &res){
+       if(root==NULL){
+           return;
+       }
+       if(root->left){
+           res.push_back(root->data);
+           leftBoundary(root->left,res);
+       }
+       else if (root->right){
+           res.push_back(root->data);
+           leftBoundary(root->right,res);
+       }
+      }
+    void bottomBoundary(Node* root,vector<int>&res){
+        if(root==NULL){
+            return;
+        }
+        if(root->left==NULL&&root->right==NULL){
+            res.push_back(root->data);
+            return;
+        }
+        bottomBoundary(root->left,res);
+        bottomBoundary(root->right,res);
+    }
+    vector<int>boundary(Node *root){
+        vector<int> res;
+        if (root->right==NULL&&root->left==NULL){
+            res.push_back(root->data);
+            return res;
+        }
+        res.push_back(root->data);
+        leftBoundary(root->left,res);
+        bottomBoundary(root,res);
+        rightBoundary(root->right,res);
+        return res;
+    }
