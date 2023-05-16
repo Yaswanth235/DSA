@@ -1,0 +1,25 @@
+Code:
+
+
+ void connect(Node*root){
+       if(root==NULL)
+            return;
+        queue<Node*>ver;
+        ver.push(root);
+        while(!ver.empty()){
+            int n=ver.size();
+            for(int i=0;i<n;i++){
+                Node*cur=ver.front();
+                ver.pop();
+                if(i<n-1)
+                    cur->nextRight=ver.front();
+                else
+                    cur->nextRight=NULL;
+                if(cur->left)
+                    ver.push(cur->left);
+                if(cur->right)
+                    ver.push(cur->right);
+            }
+        }
+        return;
+    }
