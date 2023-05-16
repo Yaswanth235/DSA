@@ -1,0 +1,54 @@
+Concept of Diagonal distance(d):
+
+
+consider a binary tree, 
+ex:
+
+
+            8(d=0)
+         /     \
+   (d=1)3       10(d=0)
+      /   \      \
+     1     6(d=1) 14(d=0)
+  (d=2)   /  \   /
+        4     7 13(d=1)
+      (d=2)  (d=1)
+      
+  
+ 
+root node is marked at d=0.
+left child is marked as d=d+1.
+right child is marked as d=d(constant)
+
+
+so the traversal is: 8  10  14  3  6  13  1  2 
+
+Approach:
+
+1. using the dequeue which allows entering of data from both sides front and back.
+
+    ----------------------------------------------------------
+         |      |      |      |     |     |      |      |
+    ----------------------------------------------------------
+      |                                                     |
+    back                                                  front
+    
+2. push the root from back.
+3. push the queue's front's right from queue's front.
+4. push the queue's front's left from queue's back.
+
+Code:
+
+vector<int>diagonal(Node*root){
+        vector<int> ans;
+   deque<Node*>q;
+   q.push_back(root);
+   while(!q.empty()){
+       Node*tmp = q.front();
+       q.pop_front();
+       ans.push_back(tmp->data);
+       if(tmp->right!=NULL)q.push_front(tmp->right);
+       if(tmp->left!=NULL) q.push_back(tmp->left);
+   }
+   return ans;
+}
