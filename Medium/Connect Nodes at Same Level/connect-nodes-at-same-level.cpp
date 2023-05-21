@@ -126,18 +126,17 @@ void inorder(Node *root)
 
 
 // } Driver Code Ends
-/* struct Node
-{
-  int data;
-  Node *left,  *right;
-  Node *nextRight;  // This has garbage value in input trees
-}; */
-
+/* struct Node {
+    int data;
+    Node* left;
+    Node* right;
+    Node* nextRight;
+};*/
 
 class Solution{
     public:
     void connect(Node*root){
-       if(root==NULL)
+          if(root==NULL)
             return;
         queue<Node*>ver;
         ver.push(root);
@@ -159,6 +158,7 @@ class Solution{
         return;
     }    
 };
+
 
 
 
