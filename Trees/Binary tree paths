@@ -1,0 +1,39 @@
+print all rootto leaf paths
+
+Code:
+
+void helper(Node* root,vector<int> arr,vector<vector<int>> &ans)
+{
+    if(!root)
+        return;
+    arr.push_back(root->data);
+    if(root->left==NULL && root->right==NULL)
+    {
+       /*This will be only true when the node is leaf node
+         and hence we will update our ans vector by inserting
+         vector arr which have one unique path from root to leaf*/
+       ans.push_back(arr);
+       //after that we will return since we don't want to check after leaf node
+        return;
+    }
+    /*recursively going left and right until we find the leaf and updating the arr
+    and ans vector simultaneously*/
+    helper(root->left,arr,ans);
+    helper(root->right,arr,ans);
+}
+vector<vector<int>> Paths(Node* root)
+{
+    /*creating 2-d vector in which each element is a 1-d vector
+      having one unique path from root to leaf*/
+    vector<vector<int>> ans;
+    /*if root is null then there is no further action require so return*/
+    if(!root)
+        return ans;
+    vector<int> arr;
+    /*arr is a vector which will have one unique path from root to leaf
+     at a time.arr will be updated recursively*/
+    helper(root,arr,ans);
+    /*after helper function call our ans vector updated with paths so we will return ans vector*/
+    return ans;
+}
+
