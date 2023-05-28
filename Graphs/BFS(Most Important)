@@ -1,0 +1,35 @@
+Approach:
+
+1.Queue data structure: follows FIFO, and will always contain the starting.
+2.Visited array: an array initialized to 0
+3.In BFS, we start with a “starting” node, mark it as visited, and push it into the queue data structure.
+4.In every iteration, we pop out the node ‘f’ and put it in the solution vector, as we are traversing this node.
+5.All the unvisited adjacent nodes from ‘f’ are visited next and are pushed into the queue. The list of adjacent neighbors of the node can be accessed from the adjacency list.
+6.Repeat steps 2 and 3 until the queue becomes empty, and this way you can easily traverse all the nodes in the graph.
+
+
+Code:
+
+class Solution {
+  public:
+    // Function to return Breadth First Traversal of given graph.
+    vector<int> bfsOfGraph(int V, vector<int>adj[]){
+          vector<bool>visited(V+1,false);
+          vector<int>v;
+          queue<int>q;
+          visited[0]=true;
+          q.push(0);
+          while(!q.empty()){
+              int f=q.front();
+              q.pop();
+              v.push_back(f);
+              for(auto it:adj[f]){
+                  if(visited[it]==false){
+                      visited[it]=true;
+                      q.push(it);
+                  }
+              }
+          }
+          return v;
+    }
+};
