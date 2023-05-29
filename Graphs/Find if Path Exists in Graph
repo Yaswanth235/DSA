@@ -1,0 +1,40 @@
+There is a bi-directional graph with n vertices, where each vertex is labeled from 0 to n - 1 (inclusive). 
+The edges in the graph are represented as a 2D integer array edges, where each edges[i] = [ui, vi] denotes a bi-directional edge between vertex ui and vertex vi.
+Every vertex pair is connected by at most one edge, and no vertex has an edge to itself.
+You want to determine if there is a valid path that exists from vertex source to vertex destination.
+Given edges and the integers n, source, and destination, return true if there is a valid path from source to destination, or false otherwise.
+
+Approach:
+
+if we observe, if we take BFS traversal, we need to check whether destination node is reached because starting form source if destination is visited then there exists a path definitely.
+
+Code:
+
+class Solution {
+public:
+    bool validPath(int n,vector<vector<int>>&edges,int source,int destination){
+        unordered_map<int,vector<int>>m;
+        for(auto it:edges){
+            m[it[0]].push_back(it[1]);
+            m[it[1]].push_back(it[0]);
+        }
+            vector<bool>visited(n,false);
+            queue<int>q;
+            visited[source]=true;
+            q.push(source);
+            while(!q.empty()){
+                int f=q.front();
+                q.pop();
+                if(f==destination){
+                    return true;
+                }
+                for(auto it:m[f]){
+                    if(!visited[it]){
+                    visited[it]=true;
+                    q.push(it);
+                    }
+                }
+            }
+        return false;
+    }
+};
