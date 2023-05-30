@@ -1,0 +1,12 @@
+void modif(Node*root,int &sum){
+    if(root==NULL)return;
+    modif(root->right,sum);
+    sum+=root->data;
+    root->data=sum;
+    modif(root->left,sum);
+}
+Node* modify(Node* root){
+    int sum=0;
+    modif(root,sum);
+    return root;
+}
