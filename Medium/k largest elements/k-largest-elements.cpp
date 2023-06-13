@@ -8,7 +8,7 @@ using namespace std;
 //User function template for C++
 class Solution{
 public:	
-	vector<int>kLargest(int arr[], int n, int k) {
+	vector<int> kLargest(int arr[], int n, int k) {
 	      priority_queue<int>pq;
 	      vector<int>v;
 	      for(int i=0;i<n;i++){
