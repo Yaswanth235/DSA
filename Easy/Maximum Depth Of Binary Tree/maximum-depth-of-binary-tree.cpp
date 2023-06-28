@@ -81,11 +81,19 @@ Node* buildTree(string str) {
 }
 
 // } Driver Code Ends
-
+/* The Node structure is
+struct Node
+{
+    int data;
+    Node* left;
+    Node* right;
+}; */
 
 class Solution{
   public:
+    /*You are required to complete this method*/
     int maxDepth(Node *root) {
+        // Your code here
         if(root==NULL)return 0;
         queue<Node*>q;
         vector<vector<int>>v;
@@ -103,6 +111,7 @@ class Solution{
             v.push_back(s);
         }
         return v.size();
+
     }
 };
 
