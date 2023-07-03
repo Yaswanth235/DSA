@@ -7,19 +7,21 @@ using namespace std;
 class Solution{
 public:
     int maxIndexDiff(int arr[], int n) {
-        int ans=0,i=0,j=n-1;
-    while (i<=j){
-        if (arr[i]<=arr[j]){
-            ans=max(ans,j-i);
-            i++;
-            j=n-1;
+        int i=0;
+        int j=n-1;
+        int maxd=0;
+        while(i!=j){
+            if(arr[i]<=arr[j]){
+               maxd=max(maxd,j-i);
+               i++;
+               j=n-1;
+            }
+            else{
+                j--;
+            }
         }
-        else
-            j--;
+        return maxd;
     }
-    return ans;
-    }
-
 };
 
 
