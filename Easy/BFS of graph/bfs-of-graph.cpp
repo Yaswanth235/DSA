@@ -5,7 +5,6 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   public:
-    // Function to return Breadth First Traversal of given graph.
     vector<int> bfsOfGraph(int V, vector<int> adj[]) {
           vector<bool>visited(V+1,false);
           vector<int>v;
