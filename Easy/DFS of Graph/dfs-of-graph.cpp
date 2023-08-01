@@ -5,7 +5,6 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   public:
-    // Function to return a list containing the DFS traversal of the graph.
     void dfs(vector<int>adj[],int s,vector<bool>&visited,vector<int>&res){
         res.push_back(s);
         visited[s]=true;
